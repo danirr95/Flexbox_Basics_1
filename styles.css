@@ -1,0 +1,147 @@
+/* Todos los elementos tendrán estos estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Para el body colocamos un font family y un background */
+body {
+  background: #f2f2f2;
+  font-family: "Raleway", sans-serif;
+}
+
+/*  */
+.contenedor {
+  /* Como ancho tendrá el 90% del tamaño que le permita su padre */
+  width: 90%;
+  /* Ancho máximo que podrá tener el elemento */
+  max-width: 1500px;
+  /* Para centrar el contenedor */
+  margin: 0 auto;
+  /* Con esta prop hacemos que si elemento se desborda, se oculte la parte que se haya desbordado */
+  overflow: hidden;
+  /* Con esto, el elemento y sus hijos adquieren las propiedades de flexbox */
+  display: flex;
+}
+
+/* Le damos un alto y un fondo al nav */
+nav {
+  height: 70px;
+  background: #5b42db;
+}
+
+.nav-content {
+  /* Tendrá el 100% de height que ya tiene su padre | Sin esto no funciona el alineamiento en el eje vertical */
+  height: 100%;
+  /* Como su padre tiene flex, puede usar align-items para centrar sus elementos en el eje secundario, en este caso, el eje vertical */
+  align-items: center;
+  /* Como su padre tiene flex... alineamos los elementos a la derecha del todo, ya que esto aplica al eje principal, y en este caso es el eje horizontal */
+  justify-content: flex-end;
+}
+
+/* Le quitamos el subrayado a los enlaces */
+.enlaces {
+  text-decoration: none;
+  color: #fff;
+  /* Colocamos display inline-block ya que los enlaces de por sí son inline, y con block podremos colocarle margin, padding, etc */
+  display: inline-block;
+  /* Esto se puede usar gracias a que hemos transformado los enlaces en elementos inline-block */
+  margin-right: 20px;
+}
+
+.principal {
+  /* El alto es el 100% del alto del dispositivo menos los 70 px de alto que mide el navbar */
+  height: calc(100vh - 70px);
+  /* Centramos los elementos de su interior según el eje secundario, en este caso, el eje vertical */
+  align-items: center;
+  /* En el eje principal, el horizontal en este caso, colocamos los elementos separados (hasta las esquinas) */
+  justify-content: space-between;
+}
+
+.ilustracion {
+  max-width: 50%;
+}
+
+/* Ocupará el 50% del tamaño, del width en este caso, porque se refiere al eje principal, que en este caso es el eje horizontal */
+.contenedor-textos {
+  padding: 30px;
+}
+
+.titulo {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.copy {
+  /* margen de 20 arriba y abajo y 0 a los lados */
+  margin: 20px 0;
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.cta {
+  /* Le debemos colocar esto porque los botones son por defecto inline, y esto tiene conflictos con el margin, padding... */
+  display: inline-block;
+
+  background: #6c63ff;
+  color: #fff;
+  text-decoration: none;
+  padding: 16px 30px;
+  border-radius: 30px;
+}
+
+/* MEDIA QUERIES */
+
+/* pantallas como máximo 1070px */
+@media screen and (max-width: 1070px) {
+  /* los enlaces se repartirán ahora todo el espacio disponible dentro del navbar */
+  .nav-content {
+    justify-content: space-evenly;
+  }
+
+  /* Los enlaces tendrán un margin 0, ya que al repartirse el espacio entre ellos, ya quedan lo suficientemente separados */
+  .enlaces {
+    margin: 0;
+  }
+
+  .principal {
+    /* Cambiamos el eje principal en el contenedor que tiene los textos, ahora el eje principal será el vertical */
+    flex-direction: column;
+    /* Los elementos se ajustan según el eje principal (ahora el horizontal) para que se repartan de forma igualitaria el espacio disponible */
+    justify-content: space-evenly;
+  }
+
+  .ilustracion {
+    flex-grow: 1;
+    /* Ancho máximo */
+    max-width: 80%;
+    /* Altura máxima */
+    max-height: 50%;
+  }
+
+  .contenedor-textos {
+    /* Alinemos los textos */
+    text-align: center;
+    /* Ocupará el ancho total que tenga su padre */
+    width: 100%;
+    /* Ocupará el 40% del tamaño que tenga su padre, en este caso se refiere a la height, ya que el eje principal es ahora el vertical ya que fue modificado en la clase 'principal', clase que tiene su padre*/
+    flex-basis: 40%;
+    /* Le colocamos la propiedad order, que por defecto es 0, para que los textos salgan por debajo de la imagen */
+    order: 1;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .ilustracion {
+    max-width: 95%;
+  }
+
+  .titulo {
+    font-size: 33px;
+  }
+
+  .copy {
+    font-size: 20px;
+  }
+}
